@@ -2,6 +2,14 @@ import py3Dmol
 import json
 import servertools
 import time
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+if not os.getenv("OPENAI_API"):
+    os.environ["OPENAI_API"] = input("Enter your OpenAI API key:")
+
 
 MODEL='gpt-4o'
 
