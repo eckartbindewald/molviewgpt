@@ -68,9 +68,15 @@ def save_html(view, html_file='molecule_visualization.html'):
     print("Visualization saved to molecule_visualization.html. Please open this file in a web browser.")
 
 
-def create_viewer():
-    """Creates and returns a py3Dmol view for a given PDB ID."""
-    view = py3Dmol.view(query='pdb:1L2Y')
+def create_viewer(pdb_code:str):
+    """
+    Creates and returns a py3Dmol view for a given PDB ID
+    
+    Args:
+
+        pdb_code(str): 4-character PDB accession code according to <https://rcsb.org>
+    """
+    view = py3Dmol.view(query=f'pdb:{pdb_code}')
     view.setStyle({'cartoon': {'color': 'spectrum'}})
     view.zoomTo()
     return view
@@ -129,10 +135,19 @@ def strip_from(text, prefix=None, postfix=None, require=False):
                 return None
     return text
 
+import sys
+
 if __name__ == "__main__":
     selection = '{}' # "chain": "A", "resi": [50, 55]}'
     style = '{"cartoon": {"colorscheme": "yellowCarbon"} }'
-    viewer = create_viewer()
+    pdb_code = "1mbn" 
+    if len(sys.argv) > 1:
+        pdb_code = sys.argv[1]
+    if len(pdb_code) != 4:
+        print("Warning: the first parameter should be a PDB code consisting of 4 characters (for example '1mbn'")
+    print("Visualizing molecular structure corresponding to PDB accession code", pdb_code)
+    print(f"For information from the PDB database seet: https://www.rcsb.org/structure/{pdb_code}")
+    viewer = create_viewer(pdb_code)
     save_html(viewer)
     # viewer.show()
     while True:
