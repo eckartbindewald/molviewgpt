@@ -1,0 +1,4 @@
+# API Key for OpenAI API access:
+OPENAI_API=YOUR_API_KEY
+
+
