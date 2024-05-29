@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 py3dmol = "*"
 requests = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
